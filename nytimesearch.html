@@ -35,20 +35,8 @@
     <h2>Top Articles</h2>
     <div id="articles"></div>
   </div>
-<script>
-  $("#nySearch").submit(function(){
-    var searchTerm = $("#nySearch > #searchTerm").val();
-    var numRecords = $("#nySearch > #records").val();
-    var startYear = $("#nySearch > #startYear").val();
-    var endYear = $("#nySearch > #endYear").val();
-    console.log(searchTerm);
-  
-  let queryString = $.param({q: searchTerm, fl: numRecords, begin_date: startYear, end_date: endYear});
-  console.log(queryString);
-});
-</script>
-    
-    <!-- <script type="text/javascript" src="assets/javascript/app1.js"></script> -->
+
+    <script type="text/javascript" src="nyt.js"></script>
 
 </body>
 </html>

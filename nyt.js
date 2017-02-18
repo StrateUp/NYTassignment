@@ -9,5 +9,9 @@ $("#nySearch").submit(function(){
   var numRecords = $("#nySearch > #records").val();
   var startYear = $("#nySearch > #startYear").val();
   var endYear = $("#nySearch > #endYear").val();
-  console.log(searchTerm);
+  queryURLBase += $.param({q: searchTerm, fl: numRecords, begin_date: startYear, end_date: endYear});
+
+  $.ajax({url: queryURLBase, method:"GET"}).done((response) => {
+    console.log(response);
+  });
 })
