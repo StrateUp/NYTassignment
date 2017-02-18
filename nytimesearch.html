@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <title>NY Site Search</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+</head>
+<body>
+
+<header class="jumbotron">
+  <h1 class="jumboH1">New York Times Search</h1>
+</header>
+
+
+<div class="container">
+
+  <form id="nySearch">
+  <p>Search Term</p>
+    <input type="text" id="searchTerm">
+  <p>Number of Records:</p>
+    <input type="text" id="records">
+  <p>Start Year:</p>
+    <input type="text" id="startYear">
+  <p>End Year:</p>
+    <input type="text" id="endYear">
+    <button id="searchBtn">Search</button>
+    <button id="clearBtn">Clear Results</button>
+
+  </form>
+
+  </div>
+  <div id="articlesPar">
+    <h2>Top Articles</h2>
+    <div id="articles"></div>
+  </div>
+<script>
+  $("#nySearch").submit(function(){
+    var searchTerm = $("#nySearch > #searchTerm").val();
+    var numRecords = $("#nySearch > #records").val();
+    var startYear = $("#nySearch > #startYear").val();
+    var endYear = $("#nySearch > #endYear").val();
+    console.log(searchTerm);
+  
+  let queryString = $.param({q: searchTerm, fl: numRecords, begin_date: startYear, end_date: endYear});
+  console.log(queryString);
+});
+</script>
+    
+    <!-- <script type="text/javascript" src="assets/javascript/app1.js"></script> -->
+
+</body>
+</html>
