@@ -1,0 +1,56 @@
+$.ajax({
+  url: queryURL,
+  method: "GET"
+})
+.done(function(response) {
+
+// ========= articleDiv
+
+var articleDiv = $(<div>);
+
+// =========headline
+
+var headline = response.docs.headline.main;
+
+var headlineP = $(<h1>).text(headline);
+
+articleDiv.append(headlineP);
+
+// =========author
+
+var author = response.docs.multimedia.credit;
+
+var authorP = $(<p>).text("By" +author);
+
+articleDiv.append(authorP);
+
+// ==========section
+
+var section = response.docs.source;
+
+var sectionP = $(<p>).text("Section:" +section)
+
+articleDiv.append(sectionP);
+
+// ==========date
+
+var date = response.docs.pub_date;
+
+var dateP = $(<p>).text(date);
+
+articleDiv.append(dateP);
+
+// ===========url
+
+var url = response.docs.headline.main;
+
+var urlP = $(<a>).text(url);
+
+articleDiv.append(url);
+
+// =========over all attachment to HTML
+
+$(#articles).append(articleDiv);
+
+
+});
