@@ -1,8 +1,7 @@
 
 
 var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-  authKey;
+var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
 
 $("#nySearch").submit(function(event){
   event.preventDefault();
@@ -10,17 +9,18 @@ $("#nySearch").submit(function(event){
   var numRecords = $("#nySearch > #records").val();
   var startYear = $("#nySearch > #startYear").val();
   var endYear = $("#nySearch > #endYear").val();
-  queryURLBase += $.param({q: searchTerm, fl: numRecords, begin_date: startYear, end_date: endYear});
 
-  $.ajax({url: queryURLBase, method:"GET"}).done((response) => {
+  queryURLBase += $.param({"api-key":authKey, q: searchTerm});
+
+  $.ajax({url: queryURLBase, method:"GET"})
+  .done((response) => {
 
     // ========= articleDiv
 
     var articleDiv = $("<div>");
 
     // =========headline
-
-    var headline = response.docs.headline.main;
+    var headline = response.response.docs[0].headline.main;
 
     var headlineP = $("<h1>").text(headline);
 
@@ -28,7 +28,7 @@ $("#nySearch").submit(function(event){
 
     // =========author
 
-    var author = response.docs.multimedia.credit;
+    var author = response.response.docs[0].multimedia.credit;
 
     var authorP = $("<p>").text("By" +author);
 
@@ -36,7 +36,7 @@ $("#nySearch").submit(function(event){
 
     // ==========section
 
-    var section = response.docs.source;
+    var section = response.response.docs[0].source;
 
     var sectionP = $("<p>").text("Section:" +section)
 
@@ -44,7 +44,7 @@ $("#nySearch").submit(function(event){
 
     // ==========date
 
-    var date = response.docs.pub_date;
+    var date = response.response.docs[0].pub_date;
 
     var dateP = $("<p>").text(date);
 
@@ -52,7 +52,7 @@ $("#nySearch").submit(function(event){
 
     // ===========url
 
-    var url = response.docs.headline.main;
+    var url = response.response.docs[0].headline.main;
 
     var urlP = $('<a>').text(url);
 
