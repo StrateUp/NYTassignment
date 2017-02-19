@@ -10,58 +10,74 @@ $("#nySearch").submit(function(event){
   var startYear = $("#nySearch > #startYear").val();
   var endYear = $("#nySearch > #endYear").val();
 
-  queryURLBase += $.param({"api-key":authKey, q: searchTerm});
+  //creating a query object that will accept values based on fields
+  let queryObj = {"api-key":authKey, q: searchTerm};
+  //this is a check for if the fields have values
+  if(numRecords != "") { //not an empty string
+    queryObj.page = numRecords;
+  }
+  if(startYear!= ""){
+    queryObj.begin_date = startYear + 0101;// date needs to be in format YYYYMMDD
+  }
+  if(endYear != ""){
+    queryObj.end_date = endYear+ 0101;
+  }
+  queryURLBase += $.param(queryObj);
 
   $.ajax({url: queryURLBase, method:"GET"})
   .done((response) => {
 
     // ========= articleDiv
+    //response.response is pretty annoying, so Im going to save it in a variable
+    var res = response.response;
+    // we need to loop through the responses so
+    for(var i = 0; i < numRecords; i++){
+      var articleDiv = $("<div>");
 
-    var articleDiv = $("<div>");
+      // =========headline
 
-    // =========headline
-    var headline = response.response.docs[0].headline.main;
+      var headline = res.docs[i].headline.main;
 
-    var headlineP = $("<h1>").text(headline);
+      var headlineP = $("<h1>").text(headline);
 
-    articleDiv.append(headlineP);
+      articleDiv.append(headlineP);
 
-    // =========author
+      // =========author
 
-    var author = response.response.docs[0].multimedia.credit;
+      var author = res.docs[i].byline.original;
 
-    var authorP = $("<p>").text("By" +author);
+      var authorP = $("<p>").text(author);
 
-    articleDiv.append(authorP);
+      articleDiv.append(authorP);
 
-    // ==========section
+      // ==========section
 
-    var section = response.response.docs[0].source;
+      var section = res.docs[i].source;
 
-    var sectionP = $("<p>").text("Section:" +section)
+      var sectionP = $("<p>").text("Section: " +section)
 
-    articleDiv.append(sectionP);
+      articleDiv.append(sectionP);
 
-    // ==========date
+      // ==========date
 
-    var date = response.response.docs[0].pub_date;
+      var date = res.docs[i].pub_date;
 
-    var dateP = $("<p>").text(date);
+      var dateP = $("<p>").text(date);
 
-    articleDiv.append(dateP);
+      articleDiv.append(dateP);
 
-    // ===========url
+      // ===========url
 
-    var url = response.response.docs[0].headline.main;
+      var url = res.docs[i].headline.main;
 
-    var urlP = $('<a>').text(url);
+      var urlP = $('<a>').text(url);
 
-    articleDiv.append(url);
+      articleDiv.append(url);
 
-    // =========over all attachment to HTML
+      // =========over all attachment to HTML
 
-    $('#articles').append(articleDiv);
+      $('#articles').append(articleDiv);
 
-
-    });
+    }
+  });
 })
