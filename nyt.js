@@ -11,7 +11,7 @@ $("#nySearch").submit(function(event){
   var endYear = $("#nySearch > #endYear").val();
 
   //creating a query object that will accept values based on fields
-  let queryObj = {"api-key":authKey, q: searchTerm};
+  let queryObj = {"api-key":authKey, q: searchTerm, limit: 10};
   //this is a check for if the fields have values
   if(numRecords != "") { //not an empty string
     queryObj.page = numRecords;
@@ -26,6 +26,7 @@ $("#nySearch").submit(function(event){
 
   $.ajax({url: queryURLBase, method:"GET"})
   .done((response) => {
+    console.log(response);
 
     // ========= articleDiv
     //response.response is pretty annoying, so Im going to save it in a variable
@@ -67,12 +68,11 @@ $("#nySearch").submit(function(event){
       articleDiv.append(dateP);
 
       // ===========url
+      var url = res.docs[i].web_url;
 
-      var url = res.docs[i].headline.main;
+      var urlP = $('<a>').text(url).attr('href', url);
 
-      var urlP = $('<a>').text(url);
-
-      articleDiv.append(url);
+      articleDiv.append(urlP);
 
       // =========over all attachment to HTML
 
