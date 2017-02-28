@@ -1,0 +1,25 @@
+#mainheader {
+	text-align: center;
+	background-color: royalblue;
+	color: cornsilk;
+
+}
+
+input {
+	margin-bottom: 10px;
+}
+
+#searchparameters {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 10px;
+	font-size: 20px;
+	background-color: royalblue;
+	color: cornsilk;
+
+}
+
+#articlesPar {
+	margin-top: 20px;
+}

@@ -5,27 +5,28 @@
     <title>NY Site Search</title>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
   </head>
   <body>
 
-      <header class="jumbotron col-xs-12">
- 
-          <h1 class="jumboH1">New York Times Search</h1>
+      <header class="jumbotron" id="mainheader">
 
+        <!-- <div class="row" id="pagetitle">  -->
+          <h1 class="jumboH1">New York Times Search</h1>
+      <!--   </div> -->
       </header>
 
     <div class="container-fluid">
 
+      <div class="col-xs-12" id="searchparameters">Search Parameters</div>
 
         <form class="form-horizontal" id="nySearch">
 
           <p class="text-left">Search Term</p>
 
             <input type="text" class="form-control" placeholder="Text input" id="searchTerm">
-
-
 
           <p class="text-left">Number of Records:</p>
 
@@ -48,7 +49,7 @@
     </div>
 
     <div class="col-xs-12" id="articlesPar">
-        <h2 class="text-left">Top Articles</h2>
+        <h3 class="text-left">Top Articles</h3>
         <div id="articles">
         </div>
     </div>
