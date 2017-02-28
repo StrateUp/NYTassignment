@@ -33,13 +33,13 @@ $("#nySearch").submit(function(event){
     var res = response.response;
     // we need to loop through the responses so
     for(var i = 0; i < numRecords; i++){
-      var articleDiv = $("<div>");
+      var articleDiv = $("<div class='newarticles'>");
 
       // =========headline
 
       var headline = res.docs[i].headline.main;
 
-      var headlineP = $("<h1>").text(headline);
+      var headlineP = $("<h1 class='newH1'>").text(headline);
 
       articleDiv.append(headlineP);
 
